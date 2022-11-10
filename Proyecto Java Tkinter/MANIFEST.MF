@@ -1,0 +1,4 @@
+Manifest-Version:1.0
+Created-By: Jose Pintado Yamo
+Main.Class: Bienvenida
+X-COMMENT: Proyecto de Java
