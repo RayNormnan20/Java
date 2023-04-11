@@ -1,6 +1,16 @@
 CREATE SCHEMA proyecto;
 USE proyecto;
 
+CREATE TABLE productos_electronicos (
+  idPro INT AUTO_INCREMENT PRIMARY KEY,
+  modelo VARCHAR(50),
+  potencia INT
+);
+CREATE TABLE productos_alimenticios (
+  idProAli INT AUTO_INCREMENT PRIMARY KEY,
+  fecha_vencimiento varchar(12),
+  pais_origen VARCHAR(50)
+);
 CREATE TABLE productos_base (
   idPro INT AUTO_INCREMENT PRIMARY KEY,
   nombre varchar (50),
@@ -12,16 +22,7 @@ CREATE TABLE productos_base (
   CONSTRAINT relac_prod_elec FOREIGN KEY (idElectronicos) REFERENCES productos_electronicos(idPro),
   CONSTRAINT relac_prod_alim FOREIGN KEY (idAlimenti) REFERENCES productos_alimenticios(idProAli)
 );
-CREATE TABLE productos_electronicos (
-  idPro INT AUTO_INCREMENT PRIMARY KEY,
-  modelo VARCHAR(50),
-  potencia INT
-);
-CREATE TABLE productos_alimenticios (
-  idProAli INT AUTO_INCREMENT PRIMARY KEY,
-  fecha_vencimiento varchar(12),
-  pais_origen VARCHAR(50)
-);
+
 CREATE TABLE clientes (
   idCliente INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(50),
