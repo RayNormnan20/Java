@@ -36,7 +36,7 @@ public class main {
 
         Venta ventas = new Venta();
 
-        int opcion1 = 0, opcion2 = 0, opcion3 = 0;
+        int opcion1 = 0, opcion2 = 0, opcion3 = 0, opcion4 = 0;
         Scanner entrada = new Scanner(System.in);
         //int opcion = 0;
 
@@ -50,7 +50,8 @@ public class main {
             stmt = conn.createStatement();
 
             //List<Producto> pro = new ArrayList<>();
-            while (opcion1 != 9) {
+            while (opcion1 != 4) {
+                System.out.println("");
                 System.out.println("======= MENU =======");
                 System.out.println("1. Registro de Datos");
                 System.out.println("2. Hacer una venta");
@@ -63,6 +64,7 @@ public class main {
                 switch (opcion1) {
                     case 1:
                         while (opcion1 != 5) {
+                            System.out.println("");
                             System.out.println("======= Registro =======");
                             System.out.println("1. Registrar Electronicos ");
                             System.out.println("2. Resgitrar Alimenticios");
@@ -76,7 +78,7 @@ public class main {
                             while (opcion2 != 5) {
                                 switch (opcion2) {
                                     case 1:
-                                        while (opcion3 != 5) {
+                                        while (opcion2 != 6) {
                                             System.out.println("");
                                             System.out.println("====PRODUCTOS ELECTRONICOS====");
                                             System.out.println("1. Registrar");
@@ -103,14 +105,16 @@ public class main {
                                                 case 4:
                                                     listaProductosElectronicos(rs, stmt, entrada);
                                                 case 5:
-                                                    System.out.println("Volviendo al menu principal");
+                                                    // System.out.println("Volviendo al menu principal");
+                                                    //if (opcion2 == 5) {
                                                     break;
+                                                // }
                                                 default:
                                                     System.out.println("Opción inválida");
+                                                    break;
                                             }
 
                                         }
-                                        break;
 
                                     case 2:
                                         while (opcion3 != 5) {
@@ -149,7 +153,9 @@ public class main {
                                         }
 
                                     case 3:
-                                        while (opcion3 != 6) {
+                                        while (opcion3 != 5) {
+                                            System.out.println("");
+                                            System.out.println("PODUCTOS");
                                             System.out.println("1. Registrar");
                                             System.out.println("2. Eliminar");
                                             System.out.println("3. Actualizar");
@@ -243,7 +249,7 @@ public class main {
                                             System.out.println("3. Actualizar");
                                             System.out.println("4. Listar");
                                             System.out.println("5. Regresar Menu anterior");
-                                            System.out.println("Elija una opción:");
+                                            System.out.print("Elija una opción: ");
                                             opcion3 = entrada.nextInt();
                                             switch (opcion3) {
                                                 case 1:
@@ -259,16 +265,16 @@ public class main {
                                                     listaClientes(rs, stmt, entrada);
                                                     break;
                                                 case 5:
-                                                    System.out.println("Volviendo al menu principal");
                                                     break;
+
                                                 default:
                                                     System.out.println("Opción inválida");
+                                                    break;
                                             }
-
+                                            break;
                                         }
 
                                     case 5:
-                                        System.out.println("Volviendo al menu principal");
                                         break;
                                     default:
                                         System.out.println("Opcion invalida");
@@ -276,13 +282,14 @@ public class main {
                                 }
 
                             }
+                            System.out.println("");
                             System.out.println("Regresando al menú principal....");
                             if (opcion2 == 5) {
                                 break;
                             }
                         }
-                        System.out.println("oooooo");
                         break;
+
                     case 2:
                         // Realiza una venta
                         ventas.hacerVenta(rs, stmt, entrada);
@@ -291,16 +298,14 @@ public class main {
                         listaFacturaVentas(rs, stmt, entrada);
                         break;
                     case 4:
-                        System.out.println("Gracias por usar nuestro programa...!!!");
+                        System.out.println("");
+                        System.out.println("¡Gracias por usar nuestro programa!\n¡Te deseamos lo mejor!");
                         System.exit(0);
 
                     default:
                         System.out.println("Opcion incorrecta");
                 }
-
             }
-            System.out.println("Gracias Por usar el Programa");
-            entrada.close();
 
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
@@ -343,11 +348,11 @@ public class main {
             System.out.print("Ingrese el nombre del cliente: ");
             String nombre = entrada.next();
             System.out.print("Ingrese apellido del cliente: ");
-            String apellido = entrada.nextLine();
+            String apellido = entrada.next();
             System.out.print("Ingrese correo del cliente: ");
-            String correo = entrada.nextLine();
+            String correo = entrada.next();
             System.out.print("Ingrese la dirección del cliente: ");
-            String direccion = entrada.nextLine();
+            String direccion = entrada.next();
 
             Cliente cli = new Cliente(nombre, apellido, correo, direccion);
             stmt.executeUpdate("INSERT INTO clientes (nombre, apellido, correo, direccion) values ('"

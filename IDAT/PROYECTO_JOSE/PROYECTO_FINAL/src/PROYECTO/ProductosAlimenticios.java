@@ -24,16 +24,10 @@ public class ProductosAlimenticios {
         this.paisOrigen = paisOrigen;
     }
 
-    /**
-     * @return the fechaVencimiento
-     */
     public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    /**
-     * @param fechaVencimiento the fechaVencimiento to set
-     */
     public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package PROYECTO;
 
 /**
@@ -41,7 +38,7 @@ public class Venta {
                     System.out.println("No hay suficiente stock para realizar la venta.");
                     return;
                 }
-                System.out.println("Ingrese la cantidad: ");
+                System.out.print("Ingrese la cantidad: ");
                 int cantidad = entrada.nextInt();
 
                 // The nextDouble() method should be called to get the total, not to read the quantity entered above
@@ -57,10 +54,11 @@ public class Venta {
                 stmt.executeUpdate("INSERT INTO facturas (fecha, idCliente, idProducto, cantidad, precioUnitario, subtotal, igv, total) "
                         + "SELECT '" + fecha + "', " + idCliente + ", " + idProducto + ", " + cantidad + ", precio, " + subtotal + ", " + igv + ", " + total
                         + " FROM productos_base WHERE idPro = " + idProducto);
-
+                
+                System.out.println("");
                 System.out.println("Venta realizada correctamente.");
             } else {
-                System.out.println("No existe un producto con el ID ingresado.");
+                System.out.println("No existe un producto con el ID " + idProducto + " ingresado.");
             }
         } catch (SQLException sqlEx) {
             System.out.println("Error al realizar la venta: " + sqlEx.getMessage());
