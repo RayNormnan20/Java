@@ -10,18 +10,22 @@ public class Pintado {
 
     public static void main(String[] args) {
         try {
-            Vivienda[] viviendas = new Vivienda[4];
-            viviendas[0] = new Departamento(70, 3, false, 5, true);
-            viviendas[1] = new Departamento(100, 4, false, 2, false);
-            viviendas[1].alquilar();
-            viviendas[2] = new Casa(400, 6, true, 3, true);
-            viviendas[3] = new Casa(200, 4, true, 1, true);
-            viviendas[3].vender();
+            Vivienda[] vivi = new Vivienda[6];
+            vivi[0] = new Departamento(3, 100, false, 5, true);
+            vivi[1] = new Departamento(7, 40, true, 2, false);
+            vivi[2] = new Departamento(1, 40, false, 21, true);
+            vivi[1].alquilar();
+            vivi[2].vender();
+
+            vivi[3] = new Casa(8, 60, true, 3, true);
+            vivi[4] = new Casa(8, 40, true, 1, false);
+            vivi[5] = new Casa(2, 100, true, 1, false);
+            vivi[4].vender();
 
             System.out.println("Feria Inmobiliaria");
             System.out.println("==================");
-            for (int i = 0; i < viviendas.length; i++) {
-                System.out.println(viviendas[i]);
+            for (int i = 0; i < vivi.length; i++) {
+                System.out.println(vivi[i].toString());
             }
 
         } catch (Exception e) {
@@ -32,7 +36,7 @@ public class Pintado {
 
 interface Habitable {
 
-    boolean ALQUILAR = true;
+    boolean ALQUILER = true;
     boolean VENDER = true;
 
     void alquilar();
@@ -47,11 +51,11 @@ abstract sealed class Vivienda implements Habitable permits Departamento, Casa {
     private boolean mascotas;
     private String estado;
 
-    public Vivienda(int metros2, int numCuartos, boolean mascotas) {
-        this.metros2 = metros2;
+    public Vivienda(int numCuartos, int metros2, boolean mascotas) {
         this.numCuartos = numCuartos;
+        this.metros2 = metros2;
         this.mascotas = mascotas;
-        this.estado = "Disponiple";
+        this.estado = "Disponible";
     }
 
     @Override
@@ -65,6 +69,7 @@ abstract sealed class Vivienda implements Habitable permits Departamento, Casa {
     }
 
     abstract boolean ofrecerAlquiler();
+
     abstract boolean ofrecerVender();
 
     public int getNumCuartos() {
@@ -102,18 +107,18 @@ abstract sealed class Vivienda implements Habitable permits Departamento, Casa {
 
 final class Departamento extends Vivienda {
 
-    private final int piso;
-    private final boolean ascensor;
+    private int piso;
+    private boolean ascensor;
 
-    public Departamento(int metros2, int numCuartos, boolean mascotas, int piso, boolean ascensor) {
-        super(metros2, numCuartos, mascotas);
+    public Departamento(int numCuartos, int metros2, boolean mascotas, int piso, boolean ascensor) {
+        super(numCuartos, metros2, mascotas);
         this.piso = piso;
         this.ascensor = ascensor;
     }
 
     @Override
     public boolean ofrecerAlquiler() {
-        return ALQUILAR;
+        return ALQUILER;
     }
 
     @Override
@@ -124,11 +129,11 @@ final class Departamento extends Vivienda {
     @Override
     public String toString() {
         ArrayList<String> arreglo = new ArrayList();
-        arreglo.add("Dpto. de " + this.getMetros2() + "m2 ");
+        arreglo.add("Dpto. de" + this.getMetros2() + "m2 ");
         arreglo.add("Cuartos: " + this.getNumCuartos());
         arreglo.add("Mascotas: " + (this.isMascotas() ? "si" : "No"));
-        arreglo.add("Piso: " + this.piso);
-        arreglo.add("Ascensor: " + (this.ascensor ? "Si" : "No"));
+        arreglo.add("Pisos: " + this.piso);
+        arreglo.add("Piscina: " + (this.ascensor ? "Si" : "No"));
         arreglo.add("Alquiler: " + (this.ofrecerAlquiler() ? "Si" : "No"));
         arreglo.add("Vender: " + (this.ofrecerVender() ? "Si" : "No"));
         arreglo.add("Estado: " + this.getEstado());
@@ -138,18 +143,18 @@ final class Departamento extends Vivienda {
 
 non-sealed class Casa extends Vivienda {
 
-    private int numPisos;
+    private int Pisos;
     private boolean piscina;
 
-    public Casa(int metros2, int numCuartos, boolean mascotas, int numPisos, boolean piscina) {
-        super(metros2, numCuartos, mascotas);
-        this.numPisos = numPisos;
+    public Casa(int numCuartos, int metros2, boolean mascotas, int numPisos, boolean piscina) {
+        super(numCuartos, metros2, mascotas);
+        this.Pisos = numPisos;
         this.piscina = piscina;
     }
 
     @Override
     public boolean ofrecerAlquiler() {
-        return !ALQUILAR;
+        return !ALQUILER;
     }
 
     @Override
@@ -157,12 +162,13 @@ non-sealed class Casa extends Vivienda {
         return VENDER;
     }
 
-    public String toStrings() {
+    @Override
+    public String toString() {
         ArrayList<String> arreglo = new ArrayList();
-        arreglo.add("Dpto. de " + this.getMetros2() + "m2 ");
+        arreglo.add("Casa de  " + this.getMetros2() + "m2 ");
         arreglo.add("Cuartos: " + this.getNumCuartos());
         arreglo.add("Mascotas: " + (this.isMascotas() ? "si" : "No"));
-        arreglo.add("Piso: " + this.numPisos);
+        arreglo.add("Pisos: " + this.Pisos);
         arreglo.add("Ascensor: " + (this.piscina ? "Si" : "No"));
         arreglo.add("Alquiler: " + (this.ofrecerAlquiler() ? "Si" : "No"));
         arreglo.add("Vender: " + (this.ofrecerVender() ? "Si" : "No"));
